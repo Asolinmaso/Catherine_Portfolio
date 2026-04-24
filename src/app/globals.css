@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@theme {
+  --font-poppins: var(--font-poppins), sans-serif;
+  --color-deep-blue: #0D3F80;
+  --color-dark-blue: #06254D;
+  --color-accent-blue: #78AFFD;
+  --color-light-bg: #FFFBF9;
+  --color-text-dark: #2E2E2E;
+  --color-text-gray: #545151;
+}
+
+body {
+  font-family: var(--font-poppins);
+  background-color: var(--color-light-bg);
+  overflow-x: hidden;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}

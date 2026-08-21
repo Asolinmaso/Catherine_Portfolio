@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './index.css';
-import { motion, AnimatePresence, useScroll, useSpring, useTransform, useInView } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useSpring, useTransform } from 'framer-motion';
 
 const CountUp = ({ end, duration = 2000, suffix = "" }) => {
   const [count, setCount] = React.useState(0);
@@ -190,8 +190,6 @@ const PremiumQuote = ({ text, delay = 0 }) => {
   return (
     <p className="hero-quote" style={{ display: 'flex', flexWrap: 'wrap', fontStyle: 'italic' }}>
       {words.map((word, i) => {
-        // Check if the word contains 'people' to apply highlight
-        const isHighlighted = word.toLowerCase().includes("people");
         return (
           <motion.span
             key={i}
@@ -240,103 +238,26 @@ const PremiumIntro = ({ name, delay = 0 }) => {
         ))}
       </motion.div>
 
-      <span className="name" style={{ display: 'inline-flex', position: 'relative' }}>
+      <span
+        className="name"
+        style={{
+          display: 'inline-flex',
+          position: 'relative',
+          fontWeight: '700'
+        }}
+      >
         {name.split("").map((char, j) => (
-          <motion.span
+          <span
             key={j}
-            initial={{
-              opacity: 0,
-              y: 20,
-              rotateY: 90,
-              filter: "blur(8px)",
-              scale: 0.8
-            }}
-            whileInView={{
-              opacity: 1,
-              y: 0,
-              rotateY: 0,
-              filter: "blur(0px)",
-              scale: 1
-            }}
-            viewport={{ once: false }}
-            transition={{
-              duration: 0.8,
-              delay: delay + 0.4 + (j * 0.04),
-              type: "spring",
-              stiffness: 260,
-              damping: 20,
-              backgroundPosition: { duration: 4, repeat: Infinity, ease: "linear" }
-            }}
-            style={{
-              display: 'inline-block',
-              background: 'linear-gradient(90deg, #0D3F80, #78AFFD, #0D3F80)',
-              backgroundSize: '200% auto',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              fontWeight: '700'
-            }}
-            animate={{ backgroundPosition: ['200% 0', '-200% 0'] }}
+            style={{ display: 'inline-block' }}
           >
             {char === " " ? "\u00A0" : char}
-          </motion.span>
+          </span>
         ))}
-        {/* Unique Highlight Shine Overlay */}
-        <motion.div
-          initial={{ left: '-100%' }}
-          whileInView={{ left: '100%' }}
-          viewport={{ once: false }}
-          transition={{
-            duration: 1.5,
-            delay: delay + 1.2,
-            repeat: Infinity,
-            repeatDelay: 3,
-            ease: "easeInOut"
-          }}
-          style={{
-            position: 'absolute',
-            top: 0,
-            width: '30%',
-            height: '100%',
-            background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent)',
-            pointerEvents: 'none',
-            zIndex: 10,
-            transform: 'skewX(-20deg)'
-          }}
-        />
       </span>
     </div>
   );
 };
-
-const TypingText = ({ text, delay = 0 }) => {
-  const characters = text.split("");
-
-  return (
-    <motion.span
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: false, amount: 0.1 }}
-      style={{ display: 'inline', position: 'relative' }}
-    >
-      {characters.map((char, i) => (
-        <motion.span
-          key={i}
-          variants={{
-            hidden: { opacity: 0, display: "none" },
-            visible: { opacity: 1, display: "inline" }
-          }}
-          transition={{
-            duration: 0.01,
-            delay: delay + (i * 0.02)
-          }}
-        >
-          {char}
-        </motion.span>
-      ))}
-    </motion.span>
-  );
-};
-
 
 const BounceText = ({ text, delay = 0 }) => {
   return (
@@ -631,63 +552,16 @@ function App() {
       setQuoteIndex((prev) => (prev + 1) % quotes.length);
     }, 6000);
     return () => clearInterval(timer);
-  }, []);
+  }, [quotes.length]);
 
   const [activeIndex, setActiveIndex] = useState(0);
-  const [direction, setDirection] = useState(0);
-
-  const [isAnimating, setIsAnimating] = useState(false);
 
   const nextSlide = () => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setDirection(1);
     setActiveIndex((prev) => (prev + 1) % testimonials.length);
   };
 
   const prevSlide = () => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setDirection(-1);
     setActiveIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  };
-
-  const variants = {
-    enter: (direction) => ({
-      x: direction > 0 ? "120%" : "-120%",
-      y: "-120%",
-      scale: 0.9,
-      rotate: direction > 0 ? 8 : -8,
-      opacity: 0,
-      zIndex: 6
-    }),
-    center: {
-      x: 0,
-      y: 0,
-      scale: 1,
-      rotate: 0,
-      opacity: 1,
-      zIndex: 5,
-      transition: {
-        x: { duration: 0.75, ease: [0.22, 1, 0.36, 1] },
-        y: { duration: 0.75, ease: [0.22, 1, 0.36, 1] },
-        scale: { duration: 0.75, ease: [0.22, 1, 0.36, 1] },
-        rotate: { duration: 0.75, ease: [0.22, 1, 0.36, 1] },
-        opacity: { duration: 0.75, ease: [0.22, 1, 0.36, 1] }
-      }
-    },
-    exit: {
-      x: 0,
-      y: 40,
-      scale: 0.85,
-      opacity: 0,
-      zIndex: 4,
-      transition: {
-        y: { duration: 0.4, ease: [0.4, 0, 1, 1] },
-        scale: { duration: 0.4, ease: [0.4, 0, 1, 1] },
-        opacity: { duration: 0.4, ease: [0.4, 0, 1, 1] }
-      }
-    }
   };
 
   const { scrollYProgress } = useScroll();
@@ -699,9 +573,8 @@ function App() {
 
   const heroY = useTransform(scrollYProgress, [0, 0.2], [0, 100]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
-  const globeScale = useTransform(scrollYProgress, [0, 0.3], [1, 1.2]);
   const footerRef = React.useRef(null);
-  const isFooterInView = useInView(footerRef, { amount: 0.1 });
+  const [footerMessage, setFooterMessage] = React.useState("");
 
   return (
     <div className="app-container">
@@ -769,97 +642,6 @@ function App() {
           </div>
         </div>
       </header>
-
-      {/* Social Bar - Moved to top for global visibility */}
-      <motion.div
-        className="vertical-social-bar"
-        initial="hidden"
-        animate={isFooterInView ? "hidden" : "visible"}
-        variants={{
-          hidden: { opacity: 0, x: 20, pointerEvents: "none" },
-          visible: {
-            opacity: 1,
-            x: 0,
-            pointerEvents: "auto",
-            transition: { staggerChildren: 0.1, delayChildren: 0.1 }
-          }
-        }}
-      >
-        {/* Instagram */}
-        <motion.a
-          href="https://www.instagram.com/hepsibah_catherine?igsh=Y2R3YXF3bTh3MXJ2"
-          target="_blank"
-          rel="noreferrer"
-          className="social-pill"
-          variants={{
-            hidden: { x: 50, opacity: 0, rotateY: 45 },
-            visible: { x: 0, opacity: 1, rotateY: 0 }
-          }}
-          whileHover={{
-            scale: 1.15,
-            rotateY: 10,
-            boxShadow: "0 0 25px rgba(13, 63, 128, 0.4), 0 0 50px rgba(13, 63, 128, 0.2)",
-            backgroundColor: "#F0F7FF"
-          }}
-        >
-          <img src="/icons/instagram.png" alt="Instagram" />
-        </motion.a>
-        {/* Email */}
-        <motion.a
-          href="mailto:connect@manvian.com"
-          className="social-pill"
-          variants={{
-            hidden: { x: 50, opacity: 0, rotateY: 45 },
-            visible: { x: 0, opacity: 1, rotateY: 0 }
-          }}
-          whileHover={{
-            scale: 1.15,
-            rotateY: 10,
-            boxShadow: "0 0 25px rgba(13, 63, 128, 0.4), 0 0 50px rgba(13, 63, 128, 0.2)",
-            backgroundColor: "#F0F7FF"
-          }}
-        >
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" /></svg>
-        </motion.a>
-        {/* WhatsApp */}
-        <motion.a
-          href="https://wa.me/918778359643"
-          target="_blank"
-          rel="noreferrer"
-          className="social-pill"
-          variants={{
-            hidden: { x: 50, opacity: 0, rotateY: 45 },
-            visible: { x: 0, opacity: 1, rotateY: 0 }
-          }}
-          whileHover={{
-            scale: 1.15,
-            rotateY: 10,
-            boxShadow: "0 0 25px rgba(13, 63, 128, 0.4), 0 0 50px rgba(13, 63, 128, 0.2)",
-            backgroundColor: "#F0F7FF"
-          }}
-        >
-          <img src="/icons/whatsapp.png" alt="WhatsApp" />
-        </motion.a>
-        {/* LinkedIn */}
-        <motion.a
-          href="https://www.linkedin.com/in/hepsibah-catherine/"
-          target="_blank"
-          rel="noreferrer"
-          className="social-pill"
-          variants={{
-            hidden: { x: 50, opacity: 0, rotateY: 45 },
-            visible: { x: 0, opacity: 1, rotateY: 0 }
-          }}
-          whileHover={{
-            scale: 1.15,
-            rotateY: 10,
-            boxShadow: "0 0 25px rgba(13, 63, 128, 0.4), 0 0 50px rgba(13, 63, 128, 0.2)",
-            backgroundColor: "#F0F7FF"
-          }}
-        >
-          <span className="linkedin-in" style={{ fontSize: '24px' }}>in</span>
-        </motion.a>
-      </motion.div>
 
       {/* Hero Section */}
       <main className="hero">
@@ -959,9 +741,9 @@ function App() {
           transition={{ duration: 0.8, delay: 0.7 }}
         >
           <span className="sn-num">
-            <CountUp end={30} suffix="+" />
+            <CountUp end={100000} suffix="+" />
           </span>
-          <span className="sn-text">Opportunities Created</span>
+          <span className="sn-text">People Empowered</span>
         </motion.div>
       </section>
 
@@ -976,9 +758,7 @@ function App() {
         >
           <h2>About Me</h2>
           <p>
-            <TypingText
-              text="As a CEO, I believe leadership is about vision, innovation, and people. My journey has been driven by the passion to build meaningful solutions that create real impact. I focus on leading with clarity, empowering talented teams, and continuously exploring new opportunities for growth. Through strategic thinking and strong execution, I strive to guide my company toward excellence while creating lasting value for our clients and community."
-            />
+            As a CEO, I believe leadership is about vision, innovation, and people. My journey has been driven by the passion to build meaningful solutions that create real impact. I focus on leading with clarity, empowering talented teams, and continuously exploring new opportunities for growth. Through strategic thinking and strong execution, I strive to guide my company toward excellence while creating lasting value for our clients and community.
           </p>
 
         </motion.div>
@@ -1351,31 +1131,23 @@ function App() {
           </button>
 
           <div className="testimonial-stack">
-            <AnimatePresence initial={false} custom={direction} onExitComplete={() => setIsAnimating(false)}>
-              {/* Main Active Card */}
-              <motion.div
-                key={activeIndex}
-                custom={direction}
-                variants={variants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                className="testimonial-card-v2 active"
-              >
-                <div className="card-inner">
-                  <p className="quote-text">“{testimonials[activeIndex].quote}”</p>
-                  <div className="user-profile">
-                    <div className="avatar">
-                      <img src={testimonials[activeIndex].image} alt={testimonials[activeIndex].name} />
-                    </div>
-                    <div className="user-info">
-                      <h4>{testimonials[activeIndex].name}</h4>
-                      <p>{testimonials[activeIndex].role}</p>
-                    </div>
+            {/* Main Active Card */}
+            <div
+              className="testimonial-card-v2 active"
+            >
+              <div className="card-inner">
+                <p className="quote-text">“{testimonials[activeIndex].quote}”</p>
+                <div className="user-profile">
+                  <div className="avatar">
+                    <img src={testimonials[activeIndex].image} alt={testimonials[activeIndex].name} />
+                  </div>
+                  <div className="user-info">
+                    <h4>{testimonials[activeIndex].name}</h4>
+                    <p>{testimonials[activeIndex].role}</p>
                   </div>
                 </div>
-              </motion.div>
-            </AnimatePresence>
+              </div>
+            </div>
           </div>
 
           <button className="nav-btn next" onClick={nextSlide} aria-label="Next">
@@ -1547,6 +1319,7 @@ function App() {
                 <div className="contact-text">
                   <h3>Phone</h3>
                   <p>+91 8778359643</p>
+                  <p>+91 75982 96248</p>
                 </div>
               </motion.a>
             </motion.div>
@@ -1760,15 +1533,6 @@ function App() {
           />
         </div>
         <div className="footer-content">
-          <motion.p
-            className="have-idea"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false }}
-            transition={{ duration: 0.8 }}
-          >
-            Have an Idea ?
-          </motion.p>
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -1784,11 +1548,27 @@ function App() {
             viewport={{ once: false }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <input type="text" placeholder="Type Your Message Here.." />
+            <input
+              type="text"
+              placeholder="Type Your Message Here.."
+              value={footerMessage}
+              onChange={(e) => setFooterMessage(e.target.value)}
+            />
             <motion.button
               className="contact-btn"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={() => {
+                const el = document.getElementById("contact");
+                if (el) {
+                  el.scrollIntoView({ behavior: "smooth", block: "start" });
+                }
+                const text = footerMessage.trim();
+                const url = text
+                  ? `https://wa.me/918778359643?text=${encodeURIComponent(text)}`
+                  : "https://wa.me/918778359643";
+                window.open(url, "_blank");
+              }}
             >
               Contact Me
             </motion.button>

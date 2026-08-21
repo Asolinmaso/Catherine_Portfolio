@@ -14,7 +14,7 @@ export default function PrestigiousFirms() {
 
   return (
     <section id="partners" className="relative w-full bg-[#06254D] py-24 lg:py-40 overflow-hidden flex flex-col items-center min-h-[900px]">
-      
+
       {/* Background Blurs (Ellipse 36, 37, 38) */}
       <div className="absolute left-[-93px] top-[-94px] w-[289px] h-[285px] bg-[#80A9FF] opacity-50 blur-[150px] lg:blur-[250px] rounded-full" />
       <div className="absolute right-0 top-[174px] w-[289px] h-[285px] bg-[#80A9FF] opacity-50 blur-[150px] lg:blur-[250px] rounded-full" />
@@ -22,7 +22,7 @@ export default function PrestigiousFirms() {
 
       {/* Orbit Rings Container (Fixed width coordinate system) */}
       <div className="relative w-full max-w-[1360px] h-[600px] md:h-[800px] flex items-center justify-center mb-16 px-6 xl:px-0">
-        
+
         {/* Concentric Rings (Ellipse 23, 24, 25, 35) */}
         <div className="absolute bottom-[0] left-1/2 -translate-x-1/2 w-[544px] h-[544px] border border-white/20 rounded-full" />
         <div className="absolute bottom-[-117px] left-1/2 -translate-x-1/2 w-[777px] h-[777px] border border-white/20 rounded-full" />
@@ -31,34 +31,34 @@ export default function PrestigiousFirms() {
 
         {/* Central Manvian Pill (Frame 212) */}
         <div className="absolute left-1/2 -translate-x-1/2 top-[317px] w-[300px] h-[98px] bg-[#78AFFD] border border-white/44 rounded-[153px] flex items-center p-2 z-30 shadow-lg group hover:scale-105 transition-all">
-           <div className="w-[87px] h-[87px] flex items-center justify-center overflow-hidden shrink-0 drop-shadow-[0_0_10px_rgba(35,86,238,0.4)]">
-             <Image 
-               src="/prestigious_firms/center.png" 
-               alt="Manvian" 
-               width={70} 
-               height={70}
-               className="object-contain"
-             />
-           </div>
-           <div className="flex flex-col ml-4">
-             <span className="text-[28px] font-normal text-[#07264F] leading-tight mb-1">Manvian</span>
-             <Link href="#" className="flex items-center gap-1 group-hover:underline">
-               <span className="text-[12px] font-medium text-[#07264F] uppercase tracking-wider">Open Website</span>
-               <span className="text-[14px] text-[#07264F] rotate-45 transform">↑</span>
-             </Link>
-           </div>
+          <div className="w-[87px] h-[87px] flex items-center justify-center overflow-hidden shrink-0 drop-shadow-[0_0_10px_rgba(35,86,238,0.4)]">
+            <Image
+              src="/prestigious_firms/center.png"
+              alt="Manvian"
+              width={70}
+              height={70}
+              className="object-contain"
+            />
+          </div>
+          <div className="flex flex-col ml-4">
+            <span className="text-[28px] font-normal text-[#07264F] leading-tight mb-1">Manvian</span>
+            <Link href="#" className="flex items-center gap-1 group-hover:underline">
+              <span className="text-[12px] font-medium text-[#07264F] uppercase tracking-wider">Open Website</span>
+              <span className="text-[14px] text-[#07264F] rotate-45 transform">↑</span>
+            </Link>
+          </div>
         </div>
 
         {/* Logo Nodes */}
         {logos.map((logo, i) => (
-          <div 
+          <div
             key={i}
             className="absolute w-[80px] h-[80px] lg:w-[95.24px] lg:h-[95.24px] z-20 flex items-center justify-center hover:scale-110 transition-transform cursor-pointer drop-shadow-[0_0_20px_rgba(120,175,253,0.6)]"
             style={{ left: logo.left, top: logo.top }}
           >
             <div className="relative w-full h-full flex items-center justify-center">
-              <Image 
-                src={logo.src} 
+              <Image
+                src={logo.src}
                 alt={`Partner ${i}`}
                 fill
                 className="object-contain"

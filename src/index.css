@@ -372,18 +372,6 @@ header .nav-links a:hover {
 .hero-hello .name {
   color: var(--primary-blue);
   font-weight: 700;
-  text-shadow: 0 0 10px rgba(13, 63, 128, 0.2);
-  animation: logo-text-glow 3s ease-in-out infinite alternate;
-}
-
-@keyframes logo-text-glow {
-  from {
-    text-shadow: 0 0 5px rgba(13, 63, 128, 0.2);
-  }
-
-  to {
-    text-shadow: 0 0 15px rgba(13, 63, 128, 0.5), 0 0 25px rgba(13, 63, 128, 0.2);
-  }
 }
 
 .hero-title {
@@ -467,7 +455,7 @@ header .nav-links a:hover {
   width: 60px;
   height: 60px;
   background: #ffffff;
-  border-radius: 50%;
+  border-radius: 50% !important;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -603,7 +591,7 @@ header .nav-links a:hover {
 
 .social-circle {
   width: 60px;
-  height: 59px;
+  height: 60px;
   background: #FFFFFF;
   border-radius: 50%;
   display: flex;
@@ -1177,6 +1165,7 @@ header .nav-links a:hover {
   position: relative;
   transition: all 0.4s ease;
   z-index: 2;
+  overflow: hidden;
 }
 
 .pill-circle img {
@@ -1261,6 +1250,7 @@ header .nav-links a:hover {
 .partner-logo-pill:hover .pill-circle {
   width: 79px;
   height: 63px;
+
 }
 
 .partner-logo-pill:hover .pill-text {
@@ -2474,7 +2464,8 @@ header .nav-links a:hover {
   font-size: 72px;
   font-weight: 700;
   margin: 0 0 80px;
-  line-height: 1.1;
+  line-height: 1.25;
+  padding-bottom: 6px;
   letter-spacing: -1px;
   background: linear-gradient(90deg, #FFFFFF, #78AFFD, #FFFFFF, #78AFFD, #FFFFFF);
   background-size: 200% auto;
@@ -2582,20 +2573,50 @@ header .nav-links a:hover {
 }
 
 .footer-copyright {
-  color: rgba(255, 255, 255, 0.8);
+  color: #FFFFFF;
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 700;
   letter-spacing: 0.5px;
   animation: copyright-fade 6s ease-in-out infinite alternate;
 }
 
+.highlight-phone {
+  animation: phone-flash 4s ease-in-out;
+  border-radius: 8px;
+  padding: 2px 8px;
+}
+
+@keyframes phone-flash {
+
+  0%,
+  100% {
+    background: transparent;
+    color: inherit;
+    box-shadow: none;
+  }
+
+  15%,
+  40% {
+    background: #FFE88A;
+    color: #02387B;
+    font-weight: 700;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+  }
+
+  65% {
+    background: rgba(255, 232, 138, 0.4);
+    color: #02387B;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+  }
+}
+
 @keyframes copyright-fade {
   0% {
-    color: rgba(255, 255, 255, 0.6);
+    color: #D9E6FF;
   }
 
   100% {
-    color: rgba(255, 255, 255, 0.9);
+    color: #FFFFFF;
   }
 }
 
@@ -3189,7 +3210,8 @@ header .nav-links a:hover {
   .partner-logo-pill:hover .pill-circle,
   .partner-logo-pill:active .pill-circle {
     width: 79px !important;
-    height: 63px !important;
+    height: 79px !important;
+    border-radius: 50% !important;
   }
 
   /* Testimonials Section V2 Mobile */

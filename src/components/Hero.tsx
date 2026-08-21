@@ -12,8 +12,8 @@ export default function Hero() {
 
         {/* Left Content */}
         <div className="w-full lg:w-[55%] flex flex-col mt-8 lg:mt-0 relative z-20 pb-20 lg:pb-32 lg:pr-10">
-          <p className="text-2xl md:text-[32px] font-medium text-black mb-4 animate-fade-in-up">
-            Hello! I’m <span className="text-deep-blue font-bold">Hepsibah Catherine</span>
+          <p className="text-2xl md:text-[32px] font-medium text-black mb-4">
+            Hello! I’m <span className="font-bold text-deep-blue">Hepsibah Catherine</span>
           </p>
 
           <h1 className="text-5xl md:text-7xl lg:text-[96px] font-extrabold text-deep-blue leading-[1.1] lg:leading-[110px] mb-8 drop-shadow-sm animate-fade-in-up delay-100 max-w-[900px] tracking-[-0.02em]">

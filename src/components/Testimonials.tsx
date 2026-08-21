@@ -79,7 +79,7 @@ export default function Testimonials() {
             <div className="relative w-full max-w-[741px] h-[392px] bg-[#F1F3FA] rounded-[24px] shadow-[0px_4px_10px_rgba(0,0,0,0.25)] z-10 flex flex-col items-start p-8 md:p-[60px_60px_40px_60px] overflow-hidden border border-white/50">
               
               {/* Quote Text */}
-              <p className="text-[20px] font-normal text-[#2E2E2E] leading-[30px] flex items-center h-[180px] w-full max-w-[621px] mb-6 md:mb-0 transition-opacity duration-300">
+              <p className="text-[20px] font-normal text-[#2E2E2E] leading-[30px] flex items-center h-[180px] w-full max-w-[621px] mb-6 md:mb-0">
                 &quot;{current.quote}&quot;
               </p>
               

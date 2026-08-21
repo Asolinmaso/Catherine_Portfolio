@@ -20,3 +20,43 @@ body {
 html {
   scroll-behavior: smooth;
 }
+
+.highlight-phone {
+  animation: phone-flash 4s ease-in-out;
+  border-radius: 8px;
+  padding: 2px 8px;
+}
+
+@keyframes orbit-ball {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes phone-flash {
+
+  0%,
+  100% {
+    background: transparent;
+    color: inherit;
+    box-shadow: none;
+  }
+
+  15%,
+  40% {
+    background: #FFE88A;
+    color: #02387B;
+    font-weight: 700;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+  }
+
+  65% {
+    background: rgba(255, 232, 138, 0.4);
+    color: #02387B;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+  }
+}
